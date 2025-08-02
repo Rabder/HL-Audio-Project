@@ -1,9 +1,9 @@
 `timescale 1ns / 1ps
 
 module fir(input_data, CLK, RST, EN, output_data, sampleT);
-parameter N1 = 8;
-parameter N2 = 16;
-parameter N3 = 32;
+parameter N1 = 16;
+parameter N2 = 32;
+parameter N3 = 64;
 
 wire signed [N1-1:0] b[0:7];
 genvar i;
