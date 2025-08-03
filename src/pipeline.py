@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from scipy import signal
 
-def generate_filter_coefficients(filter_type, sample_rate=11025, num_taps=8):
+def generate_filter_coefficients(filter_type, sample_rate=11025, num_taps=20):
     """Generate different filter coefficients for audio processing"""
     nyquist = sample_rate / 2
     
@@ -159,7 +159,7 @@ module fir_tb();
     
     // Clock generation
     always begin
-        #5 CLK = ~CLK;  // 100MHz clock for simulation
+        #1 CLK = ~CLK;  // 100MHz clock for simulation
     end
     
     // Load audio data
@@ -191,8 +191,8 @@ module fir_tb();
         end
         
         // Reset sequence
-        #20 RST = 0;
-        #10 EN = 1;
+        #4 RST = 0;
+        #2 EN = 1;
         
         // Process audio samples
         for (i = 0; i < AUDIO_LENGTH; i = i + 1) begin
@@ -390,7 +390,7 @@ def process_audio_folder_with_multiple_filters(folder_path, output_base="process
     # Different filter types to apply
     filter_types = ['lowpass', 'highpass', 'bandpass', 'bandstop']
     
-    wav_files = list(folder_path.glob("*.wav"))[:10]  # Limit to first 10 files for testing
+    wav_files = list(folder_path.glob("*.wav"))[:]  # Limit to first 10 files for testing
     
     for filter_type in filter_types:
         print(f"\n{'='*80}")
